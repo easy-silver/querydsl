@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static study.querydsl.entity.QMember.member;
 
 @Transactional
 @SpringBootTest
@@ -20,6 +21,8 @@ public class QuerydslBasicTest {
 
     @PersistenceContext
     EntityManager em;
+
+    JPAQueryFactory queryFactory;
 
     @BeforeEach
     public void before() {
@@ -53,12 +56,11 @@ public class QuerydslBasicTest {
 
     @Test
     public void startQuerydsl() {
-        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
-        QMember m = new QMember("m");
+        queryFactory = new JPAQueryFactory(em);
 
-        Member findMember = queryFactory.select(m)
-                .from(m)
-                .where(m.username.eq("member1"))
+        Member findMember = queryFactory.select(member)
+                .from(member)
+                .where(member.username.eq("member1"))
                 .fetchOne();
 
         assertThat(findMember.getUsername()).isEqualTo("member1");
