@@ -76,4 +76,17 @@ public class QuerydslBasicTest {
         assertThat(findMember.getUsername()).isEqualTo("member1");
     }
 
+    /**
+     * 파라미터 방식은 null을 무시한다.
+     */
+    @Test
+    public void searchAndParam() {
+        Member findMember = queryFactory
+                .selectFrom(member)
+                .where(member.username.eq("member1"),
+                        member.age.between(10, 30))
+                .fetchOne();
+
+        assertThat(findMember.getUsername()).isEqualTo("member1");
+    }
 }
