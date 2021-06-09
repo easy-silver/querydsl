@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import study.querydsl.entity.Member;
-import study.querydsl.entity.QMember;
 import study.querydsl.entity.Team;
 
 import javax.persistence.EntityManager;
@@ -26,6 +25,8 @@ public class QuerydslBasicTest {
 
     @BeforeEach
     public void before() {
+        queryFactory = new JPAQueryFactory(em);
+
         Team teamA = new Team("teamA");
         Team teamB = new Team("teamB");
         em.persist(teamA);
@@ -56,8 +57,6 @@ public class QuerydslBasicTest {
 
     @Test
     public void startQuerydsl() {
-        queryFactory = new JPAQueryFactory(em);
-
         Member findMember = queryFactory.select(member)
                 .from(member)
                 .where(member.username.eq("member1"))
