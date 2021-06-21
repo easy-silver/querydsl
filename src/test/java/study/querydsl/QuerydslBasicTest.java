@@ -268,7 +268,10 @@ public class QuerydslBasicTest {
                 .select(member, team)
                 .from(member)
                 .leftJoin(member.team, team)
+                //정말 외부조인일 때 사용
                 .on(team.name.eq("teamA"))
+                //내부 조인일 때 사용
+                //.where(team.name.eq("teamA"))
                 .fetch();
 
         for (Tuple tuple : result) {
