@@ -667,4 +667,11 @@ public class QuerydslBasicTest {
         }
     }
 
+    @Test
+    public void bulkAdd() {
+        long count = queryFactory
+                .update(member)
+                .set(member.age, member.age.add(1))
+                .execute();
+    }
 }
