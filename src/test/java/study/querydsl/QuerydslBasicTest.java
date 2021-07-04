@@ -674,4 +674,15 @@ public class QuerydslBasicTest {
                 .set(member.age, member.age.add(1))
                 .execute();
     }
+
+    @Test
+    public void bulkDelete() {
+        long count = queryFactory
+                .delete(member)
+                .where(member.age.gt(18))
+                .execute();
+
+        System.out.println("count = " + count);
+        assertThat(count).isEqualTo(3);
+    }
 }
