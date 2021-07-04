@@ -654,6 +654,17 @@ public class QuerydslBasicTest {
                 .where(member.age.lt(28))
                 .execute();
 
+        //벌크 연산 후에는 영속성 컨텍스트를 초기화해 주어야 한다.
+        em.flush();
+        em.clear();
+
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .fetch();
+
+        for (Member m : result) {
+            System.out.println("member = " + m);
+        }
     }
 
 }
