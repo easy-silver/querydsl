@@ -685,4 +685,18 @@ public class QuerydslBasicTest {
         System.out.println("count = " + count);
         assertThat(count).isEqualTo(3);
     }
+
+    @Test
+    public void sqlFunction() {
+        List<String> result = queryFactory
+                .select(Expressions.stringTemplate(
+                        "function('replace', {0}, {1}, {2})",
+                        member.username, "member", "M"))
+                .from(member)
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s = " + s);
+        }
+    }
 }
