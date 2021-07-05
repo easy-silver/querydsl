@@ -686,6 +686,9 @@ public class QuerydslBasicTest {
         assertThat(count).isEqualTo(3);
     }
 
+    /**
+     * replace 함수 사용하여 조회
+     */
     @Test
     public void sqlFunction() {
         List<String> result = queryFactory
@@ -693,6 +696,24 @@ public class QuerydslBasicTest {
                         "function('replace', {0}, {1}, {2})",
                         member.username, "member", "M"))
                 .from(member)
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s = " + s);
+        }
+    }
+
+    /**
+     * lower 함수 사용하여 조건 검색
+     */
+    @Test
+    public void sqlFunction2() {
+        List<String> result = queryFactory
+                .select(member.username)
+                .from(member)
+                //.where(member.username.eq(Expressions.stringTemplate("function('lower', {0})", member.username)))
+                // 위와 동일
+                .where(member.username.eq(member.username.lower()))
                 .fetch();
 
         for (String s : result) {
