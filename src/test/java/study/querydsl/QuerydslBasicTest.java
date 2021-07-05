@@ -585,6 +585,10 @@ public class QuerydslBasicTest {
         }
     }
 
+    /**
+     * 동적 조건 검색
+     * Boolean Builder 사용
+     */
     @Test
     public void dynamicQuery_BooleanBuilder() {
         String usernameParam = "member1";
@@ -609,6 +613,10 @@ public class QuerydslBasicTest {
                 .fetch();
     }
 
+    /**
+     * 동적 조건 검색
+     * 다중 파라미터 사용
+     */
     @Test
     public void dynamicQuery_WhereParam() {
         String usernameParam = "member1";
@@ -640,6 +648,9 @@ public class QuerydslBasicTest {
         return usernameEq(usernameCond).and(ageEq(ageCond));
     }
 
+    /**
+     * 벌크 수정
+     */
     @Test
     public void bulkUpdate() {
 
@@ -667,6 +678,9 @@ public class QuerydslBasicTest {
         }
     }
 
+    /**
+     * 벌크 수정
+     */
     @Test
     public void bulkAdd() {
         long count = queryFactory
@@ -675,6 +689,9 @@ public class QuerydslBasicTest {
                 .execute();
     }
 
+    /**
+     * 벌크 삭제
+     */
     @Test
     public void bulkDelete() {
         long count = queryFactory
