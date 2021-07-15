@@ -1,9 +1,10 @@
 spring:
   profiles:
     active: test
+  # TEST는 메모리 DB 사용
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/querydsl
+    url: jdbc:h2:mem:testdb
     username: sa
     password:
   h2:
